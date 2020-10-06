@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <h2>Cadastro de Funcionário</h2>
+    <h2>Alteração de Daodos do Funcionário</h2>
 </div>
 <?php if(!empty($msg)):?>  
   <div class="row justify-content-center">    
@@ -12,11 +12,13 @@
   <?php endif;?>
 <div class="row justify-content-center">    
     <div class="col-6">
-            <form method="POST" action="<?=BASE_URL;?>funcionario/cadastro_func" enctype="multipart/form-data">          
+            <form method="POST" action="<?=BASE_URL;?>funcionario/altera_func" enctype="multipart/form-data">          
+            <input type="hidden" id="codigo" name="codigo" value="<?=$func['codigo_func'];?>">
+            <input type="hidden" id="foto_nome" name="foto_nome" value="<?=$func['foto'];?>">            
             <div class="form-group row">
                 <label for="primeiro_nome" class="col-sm-3 col-form-label">Primeiro Nome:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="primeiro_nome" name="primeiro_nome" value="<?= isset($func['nome'])?$func['nome']:'';?>"  required />
+                    <input type="text" class="form-control" id="primeiro_nome" name="primeiro_nome" value="<?= isset($func['primeiro_nome'])?$func['primeiro_nome']:'';?>"  required />
                 </div>
             </div>
             <div class="form-group row">
@@ -85,11 +87,11 @@
             <div class="form-group row">
                 <label for="foto" class="col-sm-3 col-form-label">Foto:</label>
                 <div class="col-sm-9">
-                <input type="file" class="form-control-file" id="foto" name="foto" required />
+                <input type="file" class="form-control-file" id="foto" name="foto" />
                 </div>
             </div>
             <p>		  
-                <input type="submit" value="Cadastrar Funcionário" class="btn btn-primary"/>
+                <input type="submit" value="Alterar Funcionário" class="btn btn-primary"/>
             </p>    
         </form>
         

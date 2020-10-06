@@ -26,7 +26,7 @@
                     <td><?=$func['rg'];?></td>
                     <td><?=$func['data_nascimento'];?></td>
                     <td>
-                        <a href="#" class="btn btn-primary">Alterar</a>    
+                        <a href="<?=BASE_URL;?>funcionario/altera/<?=$func['codigo_func'];?>" class="btn btn-primary">Alterar</a>    
                         <a href="#" class="btn btn-danger">Excluir</a>
                     </td>
                 </tr>

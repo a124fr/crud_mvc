@@ -18,7 +18,7 @@
             </td>
             <td>
                 <?php foreach($func['telefones'] as $tel):?>
-                    <p><span>Telefone </span>: <?=$tel['tel_contato'];?></p>
+                    <p><span>Telefone </span>: <?=$tel;?></p>
                 <?php endforeach;?>
                 <p></p>
             </td>
