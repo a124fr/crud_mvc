@@ -15,12 +15,30 @@ class FuncionarioController extends Controller
     }
 
     public function cadastro()
-    {
-        $this->loadTemplate('funcionario_cadastro');
+    {   
+        $array = [
+            'msg' => [],
+            'func' => []
+        ];
+
+        if(isset($_SESSION['msg'])) {
+            $array['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+
+        if(isset($_SESSION['func'])) {
+            $array['func'] = $_SESSION['func'];
+            unset($_SESSION['func']);
+        }
+        
+        $this->loadTemplate('funcionario_cadastro', $array);
     }
 
     public function cadastro_func()
     {
+        $_SESSION['msg'] = [];
+        $_SESSION['func'] = [];
+        
         $primeiro_nome          = $_POST['primeiro_nome'];
         $nome_completo          = $_POST['nome'];
         $email                  = $_POST['email'];
@@ -32,25 +50,7 @@ class FuncionarioController extends Controller
         $telefone_contato       = $_POST['telefone_contato'];
         $telefone_residencial   = $_POST['telefone_residencial'];
         $foto                   = $_FILES['foto'];
-        $foto_nome              = 'foto.jpg';
-        
-        if($foto && $foto['tmp_name'] != '') {
-            $foto_nome = md5(time().rand(0,9999).$foto['name']);
-            $foto_tipo = $foto['type'];        
-            $foto_caminho = 'assets/images/funcionarios/';
-
-            $lista_tipos = array('image/png', 'image/jpg', 'image/jpeg');
-
-            if(in_array($foto_tipo, $lista_tipos)) {
-                $foto_extensao = explode('/', $foto_tipo);
-                $foto_extensao = $foto_extensao[1];
-
-                $foto_nome = $foto_nome.'.'.$foto_extensao;
-                move_uploaded_file($foto['tmp_name'], $foto_caminho.$foto_nome);
-            }
-        }
-
-        $funcionario = new Funcionario();
+        $foto_nome              = '';
 
         $func = [
             'nome' => $primeiro_nome,
@@ -78,8 +78,39 @@ class FuncionarioController extends Controller
         if(!empty($telefone_residencial)) {
             array_push($func['telefones'], $telefone_residencial);
         }
+        
+        $_SESSION['func'] = $func;
 
-        $funcionario->cadastrar($func);
+        if($foto && $foto['tmp_name'] != '') {
+            $foto_nome = md5(time().rand(0,9999).$foto['name']);
+            $foto_tipo = $foto['type'];        
+            $foto_caminho = 'assets/images/funcionarios/';
+
+            $lista_tipos = array('image/png', 'image/jpg', 'image/jpeg');
+
+            if(in_array($foto_tipo, $lista_tipos)) {
+                $foto_extensao = explode('/', $foto_tipo);
+                $foto_extensao = $foto_extensao[1];
+
+                $foto_nome = $foto_nome.'.'.$foto_extensao;
+                move_uploaded_file($foto['tmp_name'], $foto_caminho.$foto_nome);
+            } else {                
+                $_SESSION['msg'][] = ['foto' => "Não é possível fazer upload dessa desse tipo de arquivo."];
+                header("Location: ".BASE_URL."funcionario/cadastro");
+                exit;
+            }
+        } else {
+            $_SESSION['msg'][] = ['foto' => "É obrigatório."];
+            header("Location: ".BASE_URL."funcionario/cadastro");
+            exit;
+        }
+
+        $funcionario = new Funcionario();   
+        $funcionario->cadastrar($func);        
+
+        unset($_SESSION['msg']);
+        unset($_SESSION['func']);
+        header("Location: ".BASE_URL."funcionario");
     }
 
     public function exibe($codigo)

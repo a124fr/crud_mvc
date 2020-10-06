@@ -16,21 +16,25 @@
                 <th>Data Nasc.</th>
                 <th>Ações</th>
             </tr>
-            <?php if(count($lista_funcs) > 0):?>
+            <?php if(count($lista_funcs) > 0):?>            
                 <?php foreach($lista_funcs as $func):?>                
-                <td>
-                    <a href="<?=BASE_URL;?>funcionario/exibe/<?=$func['codigo_func'];?>"><?=$func['nome_completo'];?></a>
-                </td>
-                <td><?=$func['cpf'];?></td>
-                <td><?=$func['rg'];?></td>
-                <td><?=$func['data_nascimento'];?></td>
-                <td>
-                    <a href="#" class="btn btn-primary">Alterar</a>    
-                    <a href="#" class="btn btn-danger">Excluir</a>
-                </td>
+                <tr>
+                    <td>
+                        <a href="<?=BASE_URL;?>funcionario/exibe/<?=$func['codigo_func'];?>"><?=$func['nome_completo'];?></a>
+                    </td>
+                    <td><?=$func['cpf'];?></td>
+                    <td><?=$func['rg'];?></td>
+                    <td><?=$func['data_nascimento'];?></td>
+                    <td>
+                        <a href="#" class="btn btn-primary">Alterar</a>    
+                        <a href="#" class="btn btn-danger">Excluir</a>
+                    </td>
+                </tr>
                 <?php endforeach;?>
             <?php else: ?>
+            <tr>
                 <td colspan="6"><?php echo "Nenhum funcionário cadastrado";?></td>
+            </tr>
             <?php endif;?>
         </table>
     </div>
