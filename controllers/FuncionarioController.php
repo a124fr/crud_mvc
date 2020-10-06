@@ -116,8 +116,12 @@ class FuncionarioController extends Controller
     public function exibe($codigo)
     {
         $array = [
-            'codigo' => $codigo
+            'codigo' => $codigo,
+            'func' => []
         ];
+
+        $funcionario = new Funcionario();  
+        $array['func'] = $funcionario->pesquisarFuncionarioPorId($codigo);
 
         $this->loadTemplate('funcionario_detalhes', $array);
     }
