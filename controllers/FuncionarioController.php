@@ -202,6 +202,14 @@ class FuncionarioController extends Controller
         unset($_SESSION['msg']);
         unset($_SESSION['func']);
         header("Location: ".BASE_URL."funcionario");
+        exit;
+    }
+
+    public function exclui($codigo) {
+        $funcionario = new Funcionario();   
+        $funcionario->excluir($codigo);
+        header("Location: ".BASE_URL."/funcionario");
+        exit;        
     }
 
     public function exibe($codigo)
