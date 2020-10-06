@@ -5,9 +5,9 @@
     <div class="col-6">
             <form method="POST" action="<?=BASE_URL;?>funcionario/cadastro_func" enctype="multipart/form-data">          
             <div class="form-group row">
-                <label for="primerio_nome" class="col-sm-3 col-form-label">Primeiro Nome:</label>
+                <label for="primeiro_nome" class="col-sm-3 col-form-label">Primeiro Nome:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="primerio_nome" name="primerio_nome"  required />
+                    <input type="text" class="form-control" id="primeiro_nome" name="primeiro_nome"  required />
                 </div>
             </div>
             <div class="form-group row">
