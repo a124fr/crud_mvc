@@ -36,12 +36,32 @@ class Funcionario extends Model
 
     public function pesquisarNomeFuncionario($id)
     {
-        $sql = $this->db->prepare("SELECT primeiro_nome, FROM funcionario WHERE codigo_func = :codigo_func");
+        $sql = $this->db->prepare("SELECT primeiro_nome FROM funcionario WHERE codigo_func = :codigo_func");
         $sql->bindValue(':codigo_func', $id);
         $sql->execute();
         $nome = $sql->fetch(PDO::FETCH_ASSOC);
 
         return $nome;
+    }
+
+    public function pesquisarCPFFuncionario($id)
+    {
+        $sql = $this->db->prepare("SELECT cpf FROM funcionario WHERE codigo_func = :codigo_func");
+        $sql->bindValue(':codigo_func', $id);
+        $sql->execute();
+        $sql = $sql->fetch(PDO::FETCH_ASSOC);
+
+        return $sql['cpf'];
+    }
+
+    public function verificarCpfExiste($cpf)
+    {
+        $sql = $this->db->prepare("SELECT count(*) as contador FROM funcionario WHERE cpf = :cpf");
+        $sql->bindValue(':cpf', $cpf);
+        $sql->execute();
+        $sql = $sql->fetch(PDO::FETCH_ASSOC);
+        
+        return intval($sql['contador']) > 0;        
     }
 
     public function cadastrar(array $func)

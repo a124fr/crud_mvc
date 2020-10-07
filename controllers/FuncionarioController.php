@@ -92,6 +92,14 @@ class FuncionarioController extends Controller
             exit;
         }
 
+        $funcionario = new Funcionario();
+        // IMPLEMENTAR REGRA DE NEGÓCIO ONDE O CPF TEM QUE SER ÚNICO.
+        if($funcionario->verificarCpfExiste($func['cpf'])) {
+            $_SESSION['msg'][] = ['CPF' => "Existe um cadastro com esse cpf!"];
+            header("Location: ".BASE_URL."funcionario/cadastro/".$func['codigo']);
+            exit;
+        }
+
         if($foto && $foto['tmp_name'] != '') {
             $foto_nome = md5(time().rand(0,9999).$foto['name']);
             $foto_tipo = $foto['type'];        
@@ -116,8 +124,6 @@ class FuncionarioController extends Controller
             header("Location: ".BASE_URL."funcionario/cadastro");
             exit;
         }
-
-        $funcionario = new Funcionario();
         
         $func['data_nascimento'] = DataHelpers::converterDataParaBanco($func['data_nascimento']);
         $funcionario->cadastrar($func);        
@@ -199,9 +205,18 @@ class FuncionarioController extends Controller
         }
         
         $_SESSION['func'] = $func;
+        $funcionario = new Funcionario();
 
         if(!CPFHelpers::validaCPF($func['cpf'])) {
             $_SESSION['msg'][] = ['CPF' => "foi digitado um valor inválido!"];
+            header("Location: ".BASE_URL."funcionario/altera/".$func['codigo']);
+            exit;
+        }
+
+        $cpf_banco = $funcionario->pesquisarCPFFuncionario($func['codigo']);
+        if($func['cpf'] != $cpf_banco
+            && $funcionario->verificarCpfExiste($func['cpf'])) {
+            $_SESSION['msg'][] = ['CPF' => "Existe um cadastro com esse cpf!"];
             header("Location: ".BASE_URL."funcionario/altera/".$func['codigo']);
             exit;
         }
@@ -227,8 +242,6 @@ class FuncionarioController extends Controller
             }
         }
 
-        $funcionario = new Funcionario();
-        
         $func['data_nascimento'] = DataHelpers::converterDataParaBanco($func['data_nascimento']);
         $funcionario->alterar($func);        
 
