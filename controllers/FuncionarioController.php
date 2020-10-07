@@ -11,6 +11,11 @@ class FuncionarioController extends Controller
         $funcionario = new Funcionario();
         $array['lista_funcs'] = $funcionario->listarTodos();
         
+        for($i = 0; $i < count($array['lista_funcs']); $i++) {
+            $dat_nasc = $array['lista_funcs'][$i]['data_nascimento'];
+            $array['lista_funcs'][$i]['data_nascimento'] = DataHelpers::converterDataParaTela($dat_nasc);
+        }        
+
         $this->loadTemplate('funcionario', $array);
     }
 
@@ -106,7 +111,9 @@ class FuncionarioController extends Controller
             exit;
         }
 
-        $funcionario = new Funcionario();   
+        $funcionario = new Funcionario();
+        
+        $func['data_nascimento'] = DataHelpers::converterDataParaBanco($func['data_nascimento']);
         $funcionario->cadastrar($func);        
 
         unset($_SESSION['msg']);
@@ -121,7 +128,8 @@ class FuncionarioController extends Controller
         ];
         
         $funcionario = new Funcionario();  
-        $array['func'] = $funcionario->pesquisarFuncionarioPorId($codigo);
+        $array['func'] = $funcionario->pesquisarFuncionarioPorId($codigo);        
+        $array['func']['data_nascimento'] = DataHelpers::converterDataParaTela($array['func']['data_nascimento']);
 
         $this->loadTemplate('funcionario_altera', $array);
     }
@@ -196,7 +204,9 @@ class FuncionarioController extends Controller
             }
         }
 
-        $funcionario = new Funcionario();   
+        $funcionario = new Funcionario();
+        
+        $func['data_nascimento'] = DataHelpers::converterDataParaBanco($func['data_nascimento']);
         $funcionario->alterar($func);        
 
         unset($_SESSION['msg']);
@@ -221,6 +231,8 @@ class FuncionarioController extends Controller
 
         $funcionario = new Funcionario();  
         $array['func'] = $funcionario->pesquisarFuncionarioPorId($codigo);
+        $data_nasc = $array['func']['data_nascimento'];
+        $array['func']['data_nascimento'] = DataHelpers::converterDataParaTela($data_nasc);
 
         $this->loadTemplate('funcionario_detalhes', $array);
     }

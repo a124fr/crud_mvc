@@ -27,7 +27,7 @@
                     <td><?=$func['data_nascimento'];?></td>
                     <td>
                         <a href="<?=BASE_URL;?>funcionario/altera/<?=$func['codigo_func'];?>" class="btn btn-primary">Alterar</a>    
-                        <a href="<?=BASE_URL.'funcionario/exclui/'.$func['codigo_func'];?>" onclick="return confirm('Deseja Excluir o Funcionário?')" class="btn btn-danger">Excluir</a>
+                        <a href="<?=BASE_URL.'funcionario/exclui/'.$func['codigo_func'];?>" onclick="return confirm('Deseja Excluir o Funcionário código: <?=$func['codigo_func'];?>?')" class="btn btn-danger">Excluir</a>
                     </td>
                 </tr>
                 <?php endforeach;?>

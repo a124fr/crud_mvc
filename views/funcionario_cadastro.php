@@ -29,56 +29,56 @@
             <div class="form-group row">
                 <label for="email" class="col-sm-3 col-form-label">Email:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="email" name="email" value="<?= isset($func['email'])?$func['email']:'';?>" required />
+                    <input type="email" class="form-control" id="email" name="email" value="<?= isset($func['email'])?$func['email']:'';?>" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="cpf" class="col-sm-3 col-form-label">CPF:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="cpf" name="cpf" value="<?= isset($func['cpf'])?$func['cpf']:'';?>" maxlength="14" required />
+                    <input type="text" class="form-control cpf" id="cpf" name="cpf" value="<?= isset($func['cpf'])?$func['cpf']:'';?>" maxlength="14" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="rg" class="col-sm-3 col-form-label">RG:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="rg" name="rg" value="<?= isset($func['rg'])?$func['rg']:'';?>" maxlength="14" required />
+                    <input type="text" class="form-control rg" id="rg" name="rg" value="<?= isset($func['rg'])?$func['rg']:'';?>" maxlength="14" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="data_nasc" class="col-sm-3 col-form-label">Data Nasc:</label>
                 <div class="col-sm-9">
-                <input type="text" class="form-control" id="data_nasc" name="data_nasc" value="<?= isset($func['data_nascimento'])?$func['data_nascimento']:'';?>" maxlength="14" required />
+                <input type="text" class="form-control data_nasc" id="data_nasc" name="data_nasc" value="<?= isset($func['data_nascimento'])?$func['data_nascimento']:'';?>" maxlength="14" required />
                 </div>
             </div>
             
             <div class="form-group row">
                 <label for="telefone1" class="col-sm-3 col-form-label">Telefone 1:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="telefone1" name="telefone1" value="<?= isset($func['telefones'][0])?$func['telefones'][0]:'';?>" required />
+                    <input type="text" class="form-control telefone" id="telefone1" name="telefone1" value="<?= isset($func['telefones'][0])?$func['telefones'][0]:'';?>" required />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="telefone2" class="col-sm-3 col-form-label">Telefone 2:</label>
                 <div class="col-sm-9">
-                    <input type="text" class="form-control" id="telefone2" name="telefone2" value="<?= isset($func['telefones'][1])?$func['telefones'][1]:'';?>" />
+                    <input type="text" class="form-control telefone" id="telefone2" name="telefone2" value="<?= isset($func['telefones'][1])?$func['telefones'][1]:'';?>" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="telefone3" class="col-sm-3 col-form-label">Telefone 3:</label>
                 <div class="col-sm-9">
-                <input type="text" class="form-control" id="telefone3" name="telefone3" value="<?= isset($func['telefones'][2])?$func['telefones'][2]:'';?>" />
+                <input type="text" class="form-control telefone" id="telefone3" name="telefone3" value="<?= isset($func['telefones'][2])?$func['telefones'][2]:'';?>" />
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="telefone4" class="col-sm-3 col-form-label">Telefone 4:</label>
                 <div class="col-sm-9">
-                <input type="text" class="form-control" id="telefone4" name="telefone4" value="<?= isset($func['telefones'][3])?$func['telefones'][3]:'';?>" />
+                <input type="text" class="form-control telefone" id="telefone4" name="telefone4" value="<?= isset($func['telefones'][3])?$func['telefones'][3]:'';?>" />
                 </div>
             </div>
 
