@@ -1,5 +1,5 @@
 <div class="row justify-content-center">
-    <h2>Alteração de Daodos do Funcionário</h2>
+    <h2>Alteração de Dados do Funcionário</h2>
 </div>
 <?php if(!empty($msg)):?>  
   <div class="row justify-content-center">    
