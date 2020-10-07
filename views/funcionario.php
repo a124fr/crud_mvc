@@ -9,7 +9,8 @@
             <a href="<?=BASE_URL;?>funcionario/cadastro" class="btn btn-primary">Cadastrar</a>
         </div>
         <table class="table">
-            <tr>                
+            <tr>     
+                <th># selecione</th>           
                 <th>Nome</th>
                 <th>CPF</th>
                 <th>RG</th>
@@ -19,6 +20,9 @@
             <?php if(count($lista_funcs) > 0):?>            
                 <?php foreach($lista_funcs as $func):?>                
                 <tr>
+                    <td data-id='{"codigo": <?=$func["codigo_func"];?>, "nome": "<?=$func['nome_completo'];?>"}'>
+                        <input type="checkbox" name="selecione_func" class="selecione_func" />
+                    </td>
                     <td>
                         <a href="<?=BASE_URL;?>funcionario/exibe/<?=$func['codigo_func'];?>"><?=$func['nome_completo'];?></a>
                     </td>
@@ -37,5 +41,12 @@
             </tr>
             <?php endif;?>
         </table>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+    <div id="body_telefone">                
+    </div>
     </div>
 </div>
