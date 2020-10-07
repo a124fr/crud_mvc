@@ -14,7 +14,8 @@ $(document).ready(function(){
         if($(this).is(':checked')) {
             requisitar_telefones(funcionario);            
         } else {
-            $('#body_telefone').empty();
+            //$('#body_telefone').empty();
+            $('#tabela-'+funcionario.codigo).remove();
         }
     });
 
@@ -29,8 +30,8 @@ function requisitar_telefones(funcionario) {
         'type' : 'POST',
         'dataType': 'json',
         success: function(data) {            
-            $('#body_telefone').empty();
-
+            //$('#body_telefone').empty();
+            var div = $('<div id="tabela-'+funcionario.codigo+'">');
             var tabela = $('<table class="table">');
             var h2 = $('<h2>');
             h2.text(funcionario.nome);
@@ -46,8 +47,9 @@ function requisitar_telefones(funcionario) {
                 tabela.append(criar_linha(data[indice]['codigo_tel'], data[indice]['tel_contato']));
             }
 
-            $('#body_telefone').append(h2);
-            $('#body_telefone').append(tabela);
+            div.append(h2);
+            div.append(tabela);           
+            $('#body_telefone').append(div);
         }
     });
 }
