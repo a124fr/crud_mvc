@@ -3,11 +3,19 @@
 class GaleriaController extends Controller
 {
 	public function index()
-	{
-		$dados = array(
-			'qt' => 129
-		);
+	{	
+		$array = [
+			'lista_funcs' => []
+		];
+		
+		$funcionario = new Funcionario();
+		$array['lista_funcs'] = $funcionario->listarTodos();
 
-		$this->loadTemplate('galeria', $dados);
+		for($i = 0; $i < count($array['lista_funcs']); $i++) {
+            $dat_nasc = $array['lista_funcs'][$i]['data_nascimento'];
+            $array['lista_funcs'][$i]['data_nascimento'] = DataHelpers::converterDataParaTela($dat_nasc);
+        }
+
+		$this->loadTemplate('galeria', $array);
 	}	
 }
