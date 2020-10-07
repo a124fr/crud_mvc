@@ -86,6 +86,12 @@ class FuncionarioController extends Controller
         
         $_SESSION['func'] = $func;
 
+        if(!CPFHelpers::validaCPF($func['cpf'])) {
+            $_SESSION['msg'][] = ['CPF' => "foi digitado um valor inválido!"];
+            header("Location: ".BASE_URL."funcionario/cadastro/".$func['codigo']);
+            exit;
+        }
+
         if($foto && $foto['tmp_name'] != '') {
             $foto_nome = md5(time().rand(0,9999).$foto['name']);
             $foto_tipo = $foto['type'];        
@@ -124,8 +130,19 @@ class FuncionarioController extends Controller
     public function altera($codigo) 
     {
         $array = [
+            'msg' => [],
             'func' => []
         ];
+
+        if(isset($_SESSION['msg'])) {
+            $array['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+
+        if(isset($_SESSION['func'])) {
+            $array['func'] = $_SESSION['func'];
+            unset($_SESSION['func']);
+        }
         
         $funcionario = new Funcionario();  
         $array['func'] = $funcionario->pesquisarFuncionarioPorId($codigo);        
@@ -182,6 +199,12 @@ class FuncionarioController extends Controller
         }
         
         $_SESSION['func'] = $func;
+
+        if(!CPFHelpers::validaCPF($func['cpf'])) {
+            $_SESSION['msg'][] = ['CPF' => "foi digitado um valor inválido!"];
+            header("Location: ".BASE_URL."funcionario/altera/".$func['codigo']);
+            exit;
+        }
 
         if($foto && $foto['tmp_name'] != '') {
             $foto_nome = md5(time().rand(0,9999).$foto['name']);
