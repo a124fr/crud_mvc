@@ -215,13 +215,14 @@ class FuncionarioController extends Controller
         exit;
     }
 
-    public function exclui($codigo) {
+    public function exclui($codigo)
+    {
         $funcionario = new Funcionario();   
         $funcionario->excluir($codigo);
         header("Location: ".BASE_URL."/funcionario");
         exit;        
     }
-
+    
     public function exibe($codigo)
     {
         $array = [

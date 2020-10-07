@@ -55,10 +55,10 @@ function requisitar_telefones(funcionario) {
 }
 
 function criar_linha(id_tel, telefone) {
-    var novaLinha = $("<tr>");        
+    var novaLinha = $('<tr data-id_tel="'+id_tel+'">');        
     var colunas = "";	
         colunas += '<td>'+telefone+'</td>';	            	    
-        colunas += '<td data-id_tel="'+id_tel+'">';	    
+        colunas += '<td>';	    
         colunas += '<button onclick="RemoverLinha(this)" type="button" class="btn btn-danger">Remover</button>';	    
         colunas += '</td>';	
         novaLinha.append(colunas);
@@ -66,8 +66,20 @@ function criar_linha(id_tel, telefone) {
         return novaLinha;
 }
 
-function RemoverLinha(linha) {
-    console.log(linha);
+function RemoverLinha(linha) {    
+    var item = $(linha);
+    var tr = item.parents('tr');    
+    var codigo_tel = tr.attr('data-id_tel');
+
+    var url = BASE_URL + 'Ajax/excluirTelefoneDeFuncionario/'+codigo_tel;
+    
+    $.ajax({
+        'url': url,
+        'type': 'POST',        
+        success: function() {            
+            tr.remove();            
+        }
+    });
 }
 
 	    

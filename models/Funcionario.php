@@ -133,6 +133,13 @@ class Funcionario extends Model
         $sql->bindValue(':codigo_func', $codigo);
         $sql->execute();
     }
+    
+    public function excluirTelefonePorId($codigo)
+    {
+        $sql = $this->db->prepare("DELETE FROM telefone WHERE codigo_tel = :codigo_tel");
+        $sql->bindValue(':codigo_tel', $codigo);
+        $sql->execute();
+    }
 
     public function pesquisarTelefonesPorIdFuncionario($id)
     {
